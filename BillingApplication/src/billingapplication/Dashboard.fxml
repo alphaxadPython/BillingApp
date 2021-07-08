@@ -51,7 +51,7 @@
                            <children>
                               <ImageView fitHeight="397.0" fitWidth="303.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true">
                                  <image>
-                                    <Image url="@images/tsp3.png" />
+                                    <Image url="@images/bill3.jpg" />
                                  </image>
                               </ImageView>
                               <Label layoutX="464.0" layoutY="30.0" text="Register Customer:" textFill="#34ace0">
@@ -137,7 +137,7 @@
                         </TableView>
                         <ImageView fitHeight="413.0" fitWidth="268.0" layoutX="32.0" layoutY="74.0" pickOnBounds="true">
                            <image>
-                              <Image url="@images/tap1.jpg" />
+                              <Image url="@images/bill4.jpg" />
                            </image>
                         </ImageView>
                         <Button layoutX="752.0" layoutY="491.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="124.0" style="-fx-background-color: #34ace0;" text="Update" textFill="WHITE">
@@ -180,7 +180,7 @@
                         </TableView>
                         <ImageView fitHeight="236.0" fitWidth="247.0" layoutX="28.0" layoutY="113.0" pickOnBounds="true">
                            <image>
-                              <Image url="@images/bill%202.png" />
+                              <Image url="@images/bill.png" />
                            </image>
                         </ImageView>
                      </children>

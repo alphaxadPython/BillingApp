@@ -65,13 +65,13 @@
                                     <Font name="Arial Bold" size="13.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="363.0" layoutY="103.0" prefHeight="25.0" prefWidth="178.0" promptText="fullname" />
+                              <TextField fx:id="fullname" layoutX="363.0" layoutY="103.0" prefHeight="25.0" prefWidth="178.0" promptText="fullname" />
                               <Label layoutX="588.0" layoutY="76.0" text="Customer Location:" textFill="#227093">
                                  <font>
                                     <Font name="Arial Bold" size="13.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="588.0" layoutY="102.0" prefHeight="25.0" prefWidth="178.0" promptText="Location" />
+                              <TextField fx:id="location" layoutX="588.0" layoutY="102.0" prefHeight="25.0" prefWidth="178.0" promptText="Location" />
                               <Label layoutX="364.0" layoutY="149.0" text="Regist Date:" textFill="#227093">
                                  <font>
                                     <Font name="Arial Bold" size="13.0" />
@@ -82,7 +82,7 @@
                                     <Font name="Arial Bold" size="13.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="589.0" layoutY="174.0" prefHeight="25.0" prefWidth="178.0" promptText="meter number" />
+                              <TextField fx:id="meter" layoutX="589.0" layoutY="174.0" prefHeight="25.0" prefWidth="178.0" promptText="meter number" />
                               <Label layoutX="367.0" layoutY="216.0" text="Route No:" textFill="#227093">
                                  <font>
                                     <Font name="Arial Bold" size="13.0" />
@@ -99,10 +99,10 @@
                                     <Font name="Arial Bold" size="13.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="367.0" layoutY="312.0" prefHeight="25.0" prefWidth="178.0" promptText="fee" />
-                              <Button layoutX="588.0" layoutY="304.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="182.0" style="-fx-background-color: #34ace0;" text="Register" textFill="WHITE" />
-                              <ComboBox layoutX="590.0" layoutY="242.0" prefHeight="25.0" prefWidth="179.0" promptText="choose...." />
-                              <DatePicker layoutX="362.0" layoutY="174.0" prefHeight="25.0" prefWidth="179.0" promptText="Date" />
+                              <TextField fx:id="connection" layoutX="367.0" layoutY="312.0" prefHeight="25.0" prefWidth="178.0" promptText="fee" />
+                              <Button layoutX="588.0" layoutY="304.0" mnemonicParsing="false" onAction="#registerCustomer" prefHeight="33.0" prefWidth="182.0" style="-fx-background-color: #34ace0;" text="Register" textFill="WHITE" />
+                              <ComboBox fx:id="cartegory" layoutX="590.0" layoutY="242.0" prefHeight="25.0" prefWidth="179.0" promptText="choose...." />
+                              <DatePicker fx:id="date" layoutX="362.0" layoutY="174.0" prefHeight="25.0" prefWidth="179.0" promptText="Date" />
                            </children>
                         </Pane>
                         <Label layoutX="40.0" layoutY="34.0" text="Customer Application:" textFill="#34ace0">
@@ -135,9 +135,9 @@
                               <TableColumn prefWidth="83.0" text="cartegory" />
                           </columns>
                         </TableView>
-                        <ImageView fitHeight="413.0" fitWidth="268.0" layoutX="32.0" layoutY="74.0" pickOnBounds="true">
+                        <ImageView fitHeight="413.0" fitWidth="287.0" layoutX="13.0" layoutY="74.0" pickOnBounds="true">
                            <image>
-                              <Image url="@images/bill4.jpg" />
+                              <Image url="@images/bill5.png" />
                            </image>
                         </ImageView>
                         <Button layoutX="752.0" layoutY="491.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="124.0" style="-fx-background-color: #34ace0;" text="Update" textFill="WHITE">

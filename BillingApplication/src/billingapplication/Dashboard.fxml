@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="586.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="billingapplication.DashboardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="586.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="billingapplication.DashboardController">
    <children>
       <MenuBar layoutX="262.0" layoutY="29.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
@@ -88,7 +88,7 @@
                                     <Font name="Arial Bold" size="13.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="367.0" layoutY="242.0" prefHeight="25.0" prefWidth="178.0" promptText="fullname" />
+                              <TextField fx:id="route" layoutX="367.0" layoutY="242.0" prefHeight="25.0" prefWidth="178.0" promptText="route" />
                               <Label layoutX="592.0" layoutY="215.0" text="Cartegory:" textFill="#227093">
                                  <font>
                                     <Font name="Arial Bold" size="13.0" />
@@ -123,16 +123,15 @@
                               <Font name="Arial Bold" size="23.0" />
                            </font>
                         </Label>
-                        <TableView layoutX="303.0" layoutY="74.0" prefHeight="411.0" prefWidth="574.0">
+                        <TableView fx:id="CustomerTable" layoutX="303.0" layoutY="74.0" onMouseClicked="#clickSelect" prefHeight="411.0" prefWidth="574.0">
                           <columns>
-                            <TableColumn prefWidth="48.0" text="No" />
-                            <TableColumn prefWidth="78.0" text="Fullname" />
-                              <TableColumn prefWidth="78.0" text="location" />
-                              <TableColumn prefWidth="79.0" text="Meter No:" />
-                              <TableColumn prefWidth="66.0" text="fee" />
-                              <TableColumn prefWidth="65.0" text="Route" />
-                              <TableColumn prefWidth="76.0" text="Date" />
-                              <TableColumn prefWidth="83.0" text="cartegory" />
+                            <TableColumn fx:id="customerCol" prefWidth="78.0" text="Customer" />
+                              <TableColumn fx:id="locationCol" prefWidth="78.0" text="location" />
+                              <TableColumn fx:id="meterCol" prefWidth="79.0" text="Meter No:" />
+                              <TableColumn fx:id="feeCol" prefWidth="66.0" text="fee" />
+                              <TableColumn fx:id="routeCol" prefWidth="75.0" text="Route" />
+                              <TableColumn fx:id="dateCol" prefWidth="113.0" text="Date" />
+                              <TableColumn fx:id="cartegoryCol" prefWidth="94.0" text="cartegory" />
                           </columns>
                         </TableView>
                         <ImageView fitHeight="413.0" fitWidth="287.0" layoutX="13.0" layoutY="74.0" pickOnBounds="true">

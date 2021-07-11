@@ -28,6 +28,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import jdk.nashorn.internal.runtime.JSType;
 
 public class DashboardController implements Initializable {
 
@@ -99,6 +101,40 @@ public class DashboardController implements Initializable {
     private TextField feePaid;
     @FXML
     private Label meterReadLabel;
+    @FXML
+    private Label meterReadLabel22;
+    @FXML
+    private Label meterReadLabel221;
+    @FXML
+    private Pane BillPane;
+    @FXML
+    private Label meterReadLabel1;
+    @FXML
+    private Label meterReadLabel2;
+    @FXML
+    private Label meterleadlabelSide;
+    @FXML
+    private Label meterReadLabel21;
+    @FXML
+    private Label BillPaidLabel;
+    @FXML
+    private Label meterReadLabel211;
+    @FXML
+    private Label totalBilllabel;
+    @FXML
+    private Label meterReadLabel2111;
+    @FXML
+    private Label balanceLabel;
+    @FXML
+    private Label montlyLabel;
+    @FXML
+    private Label quatelyLabel;
+    @FXML
+    private Label meterNoLabelSide;
+    @FXML
+    private Label custmlabel;
+    @FXML
+    private Label meternoLab;
 
 //    innitializer
     @Override
@@ -197,19 +233,22 @@ public class DashboardController implements Initializable {
     }
 
 //    public variable to capture cell click data
-    public String customerName;
-     public static final LocalDate LOCAL_DATE(String dateString) {
+    public static final LocalDate LOCAL_DATE(String dateString) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate localDate = LocalDate.parse(dateString, formatter);
         return localDate;
     }
-//    on click data in the table for customers
+//    variables here
+    public String custom;
+    public String customerName;
 
+//    on click data in the table for customers
     @FXML
     private void clickSelect(MouseEvent event) {
         if (event.getClickCount() == 1) //Checking double click
         {
             customerName = CustomerTable.getSelectionModel().getSelectedItem().customer;
+            custom = CustomerTable.getSelectionModel().getSelectedItem().customer;
 
             editFullname.setText(CustomerTable.getSelectionModel().getSelectedItem().customer);
             editMeter.setText(CustomerTable.getSelectionModel().getSelectedItem().meterNo);
@@ -218,6 +257,12 @@ public class DashboardController implements Initializable {
             editConnection.setText(CustomerTable.getSelectionModel().getSelectedItem().fee);
             editLocation.setText(CustomerTable.getSelectionModel().getSelectedItem().location);
             editDate.setValue(LOCAL_DATE(CustomerTable.getSelectionModel().getSelectedItem().date.toString()));
+
+//            pass values to the next labels
+            custmlabel.setText(CustomerTable.getSelectionModel().getSelectedItem().customer);
+            meternoLab.setText(CustomerTable.getSelectionModel().getSelectedItem().meterNo);
+            meterNoLabelSide.setText(CustomerTable.getSelectionModel().getSelectedItem().meterNo);
+            mete = CustomerTable.getSelectionModel().getSelectedItem().meterNo;
 
         }
     }
@@ -314,8 +359,111 @@ public class DashboardController implements Initializable {
     private void goToUpdate(MouseEvent event) {
         bigTab.getSelectionModel().select(3);
     }
+// variables to capture data here
+    String Total;
+    String monthly;
+    String mete;
+    final Integer unit = 1000;
+    Integer bill;
+    Integer blnc;
+    Integer quater;
 
+//    calculate bill fnction here!!
     @FXML
     private void caluClateBill(ActionEvent event) {
+        try {
+            if (meterReading.getText().isEmpty() || feePaid.getText().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Please Fill All fields!!");
+                alert.setTitle("Empty Fields");
+                alert.setHeaderText(null);
+                alert.showAndWait();
+            } else {
+                //            capture data for bill
+                String read = meterReading.getText();
+                String fee = feePaid.getText();
+
+                meterleadlabelSide.setText(read + " Units");
+                BillPaidLabel.setText(fee + " /= TZSH");
+
+                meterReading.setText("");
+                feePaid.setText("");
+
+                //         caluclate total Bill
+                bill = unit * Integer.parseInt(read);
+
+                totalBilllabel.setText(bill.toString());
+                Total = bill.toString();
+
+//                caluclate balance due
+                blnc = Integer.parseInt(fee) - bill;
+                balanceLabel.setText(blnc.toString());
+
+                //                monthly bill
+                monthly = bill.toString();
+                montlyLabel.setText(bill.toString());
+
+                //                quately balance
+                quater = bill / 20;
+                quatelyLabel.setText(quater.toString());
+            }
+        } catch (Exception e) {
+        }
     }
+
+//    go to caluclate bill tab
+    @FXML
+    private void goToCaluclate(MouseEvent event) {
+        bigTab.getSelectionModel().select(2);
+    }
+
+//    save Bill
+    @FXML
+    private void saveBill(ActionEvent event) {
+        try {
+            try (Connection conn = DBconnection.getConnection()) {
+
+                // The mysql insert statement for table users_table
+                String query = "INSERT INTO bills(customer, monthly, balance, quatery_Balance, meter, Tota) VALUES (?, ?, ?, ?, ?, ?)";
+
+                // Create the mysql insert prepared statement
+                PreparedStatement preparedStmt = conn.prepareStatement(query);
+                preparedStmt.setString(1, customerName);
+                preparedStmt.setString(2, monthly);
+                preparedStmt.setString(3, blnc.toString());
+                preparedStmt.setString(4, quater.toString());
+                preparedStmt.setString(5, mete);
+                preparedStmt.setString(6, Total);
+
+                // Execute the preparedstatement
+                preparedStmt.execute();
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("Bill saved Successfully!!!!");
+                alert.setTitle("Saved");
+                alert.setHeaderText(null);
+                alert.show();
+
+                bigTab.getSelectionModel().select(1);
+
+                conn.close();
+            } catch (SQLException e) {
+                System.out.println("Cannot connect the database!" + e.getMessage());
+            }
+            System.out.println("Bill has been inserted");
+        } catch (Exception e) {
+        }
+    }
+
+    @FXML
+    private void goHome(MouseEvent event) {
+        bigTab.getSelectionModel().select(0);
+
+    }
+
+    @FXML
+    private void goConnect(MouseEvent event) {
+        bigTab.getSelectionModel().select(1);
+    }
+
 }
